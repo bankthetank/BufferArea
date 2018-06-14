@@ -2,3 +2,4 @@ C:\Program Files (x86)\TRICENTIS\Tosca Testsuite\BufferAreaAddIn.dll
 C:\VSProjects\BufferArea\BufferAreaAddIn\obj\Debug\BufferAreaAddIn.dll
 C:\VSProjects\BufferArea\BufferAreaAddIn\obj\Debug\BufferAreaAddIn.pdb
 C:\Program Files (x86)\TRICENTIS\Tosca Testsuite\BufferAreaAddIn.pdb
+C:\VSProjects\BufferArea\BufferAreaAddIn\obj\Debug\BufferAreaAddIn.csprojResolveAssemblyReference.cache

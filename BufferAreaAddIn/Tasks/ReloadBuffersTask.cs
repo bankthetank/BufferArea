@@ -56,6 +56,7 @@ namespace Tricentis.TCAddIns.BufferArea.Tasks {
             }
             var buffer = Buffer.Create();
             buffer.Name = attr.Value;
+            buffer.Value = element.Value;
             return buffer;
         }
     }
