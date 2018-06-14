@@ -77,5 +77,14 @@ namespace Tricentis.TCAddIns.BufferArea.TCObjects {
 
             taskList.Add(TaskFactory.Instance.GetTask(typeof(SearchAllTestStepUsages)));
         }
+
+        protected override void HandleAspectChangedNow(ChangeAspect changedAspect, PersistableObject changedObject) {
+            base.HandleAspectChangedNow(changedAspect, changedObject);
+
+            // detect name and value change, keep in mind you want the ORIGINAL NAME (so upon creation it might be null which is fine)
+            // Delete buffers from xml
+            // Change value of buffer
+            // changeAspect.Name
+        }
     }
 }
