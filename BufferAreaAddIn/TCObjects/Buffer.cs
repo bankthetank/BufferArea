@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Tricentis.Data.Model;
 using Tricentis.TCAddIns.BufferArea.Tasks;
+using Tricentis.TCAddIns.BufferArea.Utils;
 using Tricentis.TCCore.Base.Folders;
 using Tricentis.TCCore.Base.Ownership;
 using Tricentis.TCCore.Persistency;
@@ -82,9 +83,25 @@ namespace Tricentis.TCAddIns.BufferArea.TCObjects {
             base.HandleAspectChangedNow(changedAspect, changedObject);
 
             // detect name and value change, keep in mind you want the ORIGINAL NAME (so upon creation it might be null which is fine)
-            // Delete buffers from xml
-            // Change value of buffer
-            // changeAspect.Name
+            string aspectName = changedAspect.Name;
+            string objName = changedObject.DisplayedName;
+            string objValue = changedObject.GetAttributeValue("Value") as string;
+
+            if (aspectName == "Buffer.Value") { // Change value of buffer
+                Helper.UpdateBufferValue(objName, objValue);
+            }
+            else if (aspectName == "NamedObject.Name") { // changeAspect.Name
+                if (!Helper.BufferExists(objName)) {
+                    Helper.SaveNewBuffer(objName, objValue);
+                }
+                else {
+                    Helper.UpdateBufferValue(objName, objValue);
+                }
+            }
+            else if (aspectName == "PersistableObject.Deleting") { // Delete buffers from xml
+                Helper.DeleteBuffer(objName);
+            }
+            
         }
     }
 }

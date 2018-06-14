@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using Tricentis.TCAddIns.BufferArea.TCObjects;
+using Tricentis.TCAddIns.BufferArea.Utils;
 using Tricentis.TCCore.BusinessObjects.Folders;
 using Tricentis.TCCore.Persistency;
 using Tricentis.TCCore.Persistency.Tasks;
@@ -29,7 +30,7 @@ namespace Tricentis.TCAddIns.BufferArea.Tasks {
 
         private void GetBuffersFromSettings(TCFolder folder) {
             XDocument doc = XDocument.Load(@"C:\ProgramData\TRICENTIS\TOSCA Testsuite\7.0.0\Settings\XML\Settings.xml");
-            var bufferRoot = doc.Root.Descendants().FirstOrDefault(IsXmlBufferNode);
+            var bufferRoot = doc.Root.Descendants().FirstOrDefault(Helper.IsXmlBufferNode);
             if(bufferRoot == null) {
                 return;
             }
@@ -40,15 +41,7 @@ namespace Tricentis.TCAddIns.BufferArea.Tasks {
                 }
             }
         }
-
-        private bool IsXmlBufferNode(XElement element) {
-            if (element.Name.LocalName != "Collection") {
-                return false;
-            }
-            XAttribute attr = element.Attribute("name");
-            return attr != null && attr.Value == "Buffer";
-        }
-
+   
         private Buffer CreateToscaBuffer(XElement element) {
             XAttribute attr = element.Attribute("name");
             if(attr == null) {
